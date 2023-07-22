@@ -35,24 +35,24 @@ void generateCoordinates(int & x, int & y){
 
 bool checkRow(int row){
     if (board.player[row][1] == board.player[row][2] && board.player[row][1] == board.player[row][3])
-        if (board.player[row][1] != '_' && board.player[row][1] != ' ')
+        if (board.status[row][1] == true)
             return true;
     return false;
 }
 
 bool checkCol(int col){
     if (board.player[1][col] == board.player[2][col] && board.player[1][col] == board.player[3][col])
-        if (board.player[1][col] != '_' && board.player[1][col] != ' ')
+        if (board.status[1][col] == true)
             return true;
     return false;
 }
 
 bool checkDiags(){
     if (board.player[1][1] == board.player[2][2] && board.player[1][1] == board.player[3][3])
-        if (board.player[1][1] != '_' && board.player[1][1] != ' ')
+        if (board.status[1][1] == true)
             return true;
     if (board.player[1][3] == board.player[2][2] && board.player[1][3] == board.player[3][1])
-        if (board.player[2][2] != '_' && board.player[2][2] != ' ')
+        if (board.status[2][2] == true)
             return true;
     return false;
 }
@@ -97,6 +97,10 @@ int main(void){
         std::cout << "Choose a cell(1-1 ---> 3-3):\n";
         int x, y;
         std::cin >> x >> y;
+        if (board.status[x][y] == true){
+            std::cout << "Cell is already occupied. Choose another cell:\n";
+            continue;
+        }
         board.status[x][y] = true;
         board.player[x][y] = 'X';
 
